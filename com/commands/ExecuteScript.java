@@ -5,10 +5,7 @@ import com.google.gson.JsonArray;
 import com.worker.Worker;
 
 import java.io.*;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class ExecuteScript {
 
@@ -19,7 +16,7 @@ public class ExecuteScript {
      * @exception FileNotFoundException - Файл не обнаружен
      * @exception StackOverflowError - Рекурсия
      * */
-    public void execute(CollectionManager manager,String filePath, String data, Queue<String> history) throws IOException {
+    public void execute(CollectionManager manager,String filePath, String data, Queue<String> history, LinkedList es) throws IOException {
         //userCommand = scanner.nextLine();
         try {
             String line;
@@ -44,7 +41,19 @@ public class ExecuteScript {
                                 manager.help();
                                 break;
                             case "execute_script":
-                                manager.execute_script(manager,finalUserCommand[1],data,history);
+                                es.add(finalUserCommand[1]);
+                                Iterator iterator = es.iterator();
+                                int count = 0;
+                                while (iterator.hasNext()){
+                                    if (iterator.next().equals(finalUserCommand[1])){
+                                        count++;
+                                    }
+                                }
+                                if (count == 2){
+                                    System.out.println("Рекурсия");
+                                    break;
+                                }
+                                manager.execute_script(manager,finalUserCommand[1],data,history,es);
                                 break;
                             case "info":
                                 System.out.println(manager.toString());
