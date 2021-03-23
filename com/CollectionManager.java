@@ -204,9 +204,9 @@ public class CollectionManager {
      * @exception FileNotFoundException - Файл не обнаружен
      * @exception StackOverflowError - Рекурсия
      * */
-    public void execute_script(CollectionManager manager,String filePath, String data, Queue<String> history) throws IOException {
+    public void execute_script(CollectionManager manager,String filePath, String data, Queue<String> history,LinkedList es) throws IOException {
         ExecuteScript executeScript = new ExecuteScript();
-        executeScript.execute(manager,filePath,data,history);
+        executeScript.execute(manager,filePath,data,history,es);
     }
 
 
