@@ -46,10 +46,12 @@ public class CommandSelector {
                         manager.update(Integer.parseInt(finalUserCommand[1]),scanner2);
                         break;
                     case "execute_script":
+                        LinkedList <String> es = new LinkedList<>();
+                        es.add(finalUserCommand[1]);
                         history.add(finalUserCommand[0]); // сделано, чтобы работа history была корректной
                         if (history.size() > 6)
                             history.remove();
-                        manager.execute_script(manager,finalUserCommand[1],data,history);
+                        manager.execute_script(manager,finalUserCommand[1],data,history,es);
                         break;
                     case "save":
                         manager.save();
@@ -107,3 +109,4 @@ public class CommandSelector {
         }
     }
 }
+
