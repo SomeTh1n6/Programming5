@@ -13,9 +13,15 @@ public class CommandSelector {
     public void start(String data, Queue<String> history) throws IOException {
 
         CollectionManager manager = new CollectionManager(data);
-
+        String userCommand = null;
         Scanner scanner = new Scanner(System.in);
-        String userCommand = scanner.nextLine(); // строка , введенная пользователем
+        if (scanner.hasNextLine()) {
+            userCommand = scanner.nextLine(); // строка , введенная пользователем
+        }
+        else{
+            System.out.println("Ошибка ввода");
+            System.exit(1);
+        }
         String[] finalUserCommand = userCommand.trim().split(" ", 2); // разбиение этой строки на 2 подстроки (команда и агрумент к ней)
         while (!finalUserCommand[0].equals("exit")) {
             try {
@@ -90,9 +96,14 @@ public class CommandSelector {
                 if (history.size() > 6)
                     history.remove();
             }
-            userCommand = scanner.nextLine();
+            if (scanner.hasNextLine()) {
+                userCommand = scanner.nextLine(); // строка , введенная пользователем
+            }
+            else{
+                System.out.println("Ошибка ввода");
+                System.exit(1);
+            }
             finalUserCommand = userCommand.trim().split(" ", 2);
         }
     }
 }
-
